@@ -24,7 +24,7 @@ const fetchProduct = async (params) => {
 
 const listProducts = async (params) => {
     try {
-        const response = await productModel.find(params?.data);
+        const response = await productModel.find(params?.email);
         console.log("Response of listProducts", response);
         return response;
     } catch (error) {
@@ -33,4 +33,39 @@ const listProducts = async (params) => {
     }
 }
 
-module.exports = { addProduct,fetchProduct,listProducts };
+const editProduct = async(params) => {
+    try {
+        console.log("params",params);
+        const {id, ...dataToStore} = params?.data;
+        console.log("id, ...dataToStore",id, dataToStore)
+        const response = await productModel.findOneAndUpdate({_id : params?.data?.id},dataToStore,{ returnDocument: 'after' });
+        return response;
+    } catch (error) {
+        console.log("Error inside editProduct", error);
+       throw error; 
+    }
+}
+
+const deleteProduct = async (params) => {
+    try {
+        console.log("params",params);
+        const response = await productModel.deleteOne({_id : params?.data});
+        console.log("response",response);
+        return response;
+    } catch (error) {
+        console.log("Error inside delete product", error);
+        throw error;
+    }
+}
+
+const listAllProducts = async (params) => {
+try {
+    const response = await productModel.find({});
+    console.log("Response in listAllProducts",response);
+    return response;
+} catch (error) {
+    console.log("Error inside listAllProducts",error);
+    throw error;
+}
+}
+module.exports = { addProduct,fetchProduct,listProducts, editProduct, deleteProduct, listAllProducts };

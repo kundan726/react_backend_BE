@@ -1,5 +1,5 @@
 const { createUser, fetchOneUser } = require("../queries/loginModule.queries");
-const {addProduct, fetchProduct, listProducts} = require('../queries/productQueries')
+const {addProduct, fetchProduct, listProducts, editProduct, deleteProduct, listAllProducts} = require('../queries/productQueries')
 const main = async (params) => {
   try {
     const { action } = params;
@@ -25,6 +25,15 @@ const main = async (params) => {
         break;
       case "listProducts":
         response = await listProducts(params);
+        break;
+      case "editProduct":
+        response = await editProduct(params);
+        break;
+      case "deleteProduct":
+        response = await deleteProduct(params);
+        break;
+      case "listAllProducts":
+        response = await listAllProducts(params);
         break;
       default:
         throw new Error("Invalid action on DB");

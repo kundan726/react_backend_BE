@@ -27,4 +27,5 @@ const upload = multer({
     })
 })
 
-module.exports = upload;
+const noImageMulter = multer().none();
+module.exports = {upload, noImageMulter};

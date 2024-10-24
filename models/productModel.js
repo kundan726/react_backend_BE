@@ -43,6 +43,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       // required:  true
     },
+    productCategory: {
+      type: String,
+      // required:  true
+    },
     productTags: {
       type: String,
       // required:  true

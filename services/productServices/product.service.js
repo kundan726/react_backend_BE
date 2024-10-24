@@ -60,4 +60,58 @@ const listProductsService = async (obj) => {
         throw error;
     }
 }
-module.exports = { addProductService, fetchProductService,listProductsService }
+
+const editProductService = async (obj) => {
+    try {
+        const params = {
+            action: 'editProduct',
+            data: obj
+        }
+        const editProductResponse = await main(params);
+        return {
+            statusCode: 200,
+            response: editProductResponse,
+            msg: "Product Edited Successfully"
+        }
+    } catch (error) {
+        console.log("Error insode editProductService",error);
+        throw error;
+    }
+}
+
+const deleteProductService = async (id) => {
+    try {
+        const params = {
+            action : 'deleteProduct',
+            data : id
+        };
+        const deleteProductResponse = await main(params);
+        return {
+            statusCode: 200,
+            response: deleteProductResponse,
+            msg : "Product Deleted Successfully"
+        }
+    } catch (error) {
+        console.log("Error inside deleteProductService",error);
+        throw error;
+    }
+}
+
+const listAllProduct = async () => {
+    try {
+        const params = {
+            action : 'listAllProducts',
+            data: null
+        };
+        const responseForAllProducts = await main(params);
+        return {
+            statusCode: 200,
+            response: responseForAllProducts,
+            msg : 'Products listed successfellu'
+        }
+    } catch (error) {
+        console.log("Error inside listProduct", error);
+        throw error;
+    }
+}
+module.exports = { addProductService, fetchProductService,listProductsService, editProductService, deleteProductService, listAllProduct }
