@@ -113,5 +113,23 @@ const listAllProduct = async () => {
         console.log("Error inside listProduct", error);
         throw error;
     }
+};
+
+const fetchLikeProductsService = async (tags) => {
+    try {
+        const params = {
+            action : "listLikeProducts",
+            data: tags
+        };
+        const responseForFetchLikeProduct = await main(params);
+        return {
+            statusCode: 200,
+            response: responseForFetchLikeProduct,
+            msg : 'Products listed successfellu'
+        }
+    } catch (error) {
+        console.log("Error inside product service",error);
+        throw error;
+    }
 }
-module.exports = { addProductService, fetchProductService,listProductsService, editProductService, deleteProductService, listAllProduct }
+module.exports = { addProductService, fetchProductService,listProductsService, editProductService, deleteProductService, listAllProduct, fetchLikeProductsService }

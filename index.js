@@ -10,6 +10,8 @@ app.use(cors());
 dbConnection(mongodbURL);
 const routes = require('./routes');
 app.use('/api',routes);
+require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
+console.log("Running in:", process.env.NODE_ENV);
 app.listen(port, () => {
     console.log(`App is listening on ${port}`);
 })

@@ -1,5 +1,5 @@
-const { createUser, fetchOneUser } = require("../queries/loginModule.queries");
-const {addProduct, fetchProduct, listProducts, editProduct, deleteProduct, listAllProducts} = require('../queries/productQueries')
+const { createUser, fetchOneUser, storeOtp, fetchOtp, updateOtpDocument} = require("../queries/loginModule.queries");
+const {addProduct, fetchProduct, listProducts, editProduct, deleteProduct, listAllProducts,listLikeProducts } = require('../queries/productQueries')
 const main = async (params) => {
   try {
     const { action } = params;
@@ -35,6 +35,18 @@ const main = async (params) => {
       case "listAllProducts":
         response = await listAllProducts(params);
         break;
+      case "listLikeProducts":
+        response = await listLikeProducts(params);
+        break;
+      case "storeOTP":
+        response = await storeOtp(params);
+        break
+      case "fetchOtp":
+        response = await fetchOtp(params);
+        break;
+      case "updateOtpDocument":
+          response = await updateOtpDocument(params);
+          break;
       default:
         throw new Error("Invalid action on DB");
     }
@@ -74,7 +86,6 @@ const throwErrorForMissingFields = async (receivedData, requiredData) => {
   });
 
   if (missingKeys.length > 0) {
-    console.log("111111111");
     throw new Error(`Missing keys: ${missingKeys.join(",")}`);
   }
 };

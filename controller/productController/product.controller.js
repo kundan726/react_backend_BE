@@ -4,7 +4,8 @@ const {
   listProductsService,
   editProductService,
   deleteProductService,
-  listAllProduct
+  listAllProduct,
+  fetchLikeProductsService
 } = require("../../services/productServices/product.service");
 const { buildResponse } = require("../../utilities/utilities");
 
@@ -109,5 +110,18 @@ const listProductController = async (req, res) => {
     console.log("Error inside listProductController", error);
     return res.status(400).json(buildResponse(400, null, error?.message || 'An Error Occurred'))
   }
+};
+
+const fetchLikeProductsController = async (req, res) => {
+  try {
+    // const tags = req?.query?.productTags.split(',');
+    const tags = req?.body?.tags
+    console.log("tagsss",req)
+    const response = await fetchLikeProductsService(tags);
+    return res.status(200).json(buildResponse(response?.statusCode,response?.response,response?.msg))
+  } catch (error) {
+    console.log("Error inside fetchLikeProductController",error);
+    return res.status(400).json(buildResponse(400, null, error?.message || 'An Error occurred'));
+  }
 }
-module.exports = { addProduct, fetchProductController, listSellerProductsController , editProductController,deleteProductController, listProductController };
+module.exports = { addProduct, fetchProductController, listSellerProductsController , editProductController,deleteProductController, listProductController, fetchLikeProductsController };

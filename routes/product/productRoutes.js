@@ -6,7 +6,8 @@ const {
   listSellerProductsController,
   listProductController,
   editProductController,
-  deleteProductController
+  deleteProductController,
+  fetchLikeProductsController
 } = require("../../controller/productController/product.controller");
 const {upload, noImageMulter} = require("../../utilities/fileUpload");
 
@@ -16,5 +17,5 @@ router.get("/listSellerProducts", listSellerProductsController);
 router.post("/editProduct",noImageMulter, editProductController);
 router.post("/deleteProduct", deleteProductController);
 router.get("/listProducts",listProductController);
-
+router.post("/fetchLikeProducts",fetchLikeProductsController);
 module.exports = router;
