@@ -21,6 +21,30 @@ const fetchOneUser = async (params) => {
   }
 };
 
+const updateUser = async (params) => {
+  try {
+    console.log("+++++",params)
+    if (!params?.data?.email || !params?.data?.password) {
+      throw new Error("Email and password are required");
+    }
+
+    const response = await loginModel.findOneAndUpdate(
+      { email: params.data.email },
+      { $set: { password: params.data.password } },
+      { new: true, runValidators: true }
+    );
+
+    if (!response) {
+      throw new Error("User not found or update failed");
+    }
+
+    return response;
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
+  }
+};
+
 const storeOtp = async (params) => {
   try {
     const response = await otpModel.create(params?.data);
@@ -57,4 +81,4 @@ const updateOtpDocument = async (params) => {
   }
 };
 
-module.exports = { createUser, fetchOneUser, storeOtp, fetchOtp, updateOtpDocument };
+module.exports = { createUser, fetchOneUser, storeOtp, fetchOtp, updateOtpDocument, updateUser };

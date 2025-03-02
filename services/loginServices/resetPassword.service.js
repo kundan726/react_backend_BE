@@ -1,5 +1,9 @@
 const sendEmail = require("../../utilities/mailservice");
-const { buildResponse, main, throwErrorForMissingFields } = require("../../utilities/utilities");
+const {
+  buildResponse,
+  main,
+  throwErrorForMissingFields,
+} = require("../../utilities/utilities");
 
 const resetPassword = async (req, res) => {
   try {
@@ -48,7 +52,7 @@ const resetPassword = async (req, res) => {
         email,
         emailMessageId: emailResponse?.response?.messageId,
         isVerified: false,
-        expiresAt: Date.now() + 5*60*1000
+        expiresAt: Date.now() + 5 * 60 * 1000,
       },
     };
     let otpResponse = await main(otpParams);
@@ -57,7 +61,11 @@ const resetPassword = async (req, res) => {
       console.log("Storing OTP Response:", otpResponse);
       console.log("Email Response:", emailResponse);
     }
-    return { statusCode: 200, response: null, msg: "OTP sent successfully. Please check your email." };    
+    return {
+      statusCode: 200,
+      response: null,
+      msg: "OTP sent successfully. Please check your email.",
+    };
   } catch (error) {
     return res.status(400).json(buildResponse(400, null, error?.message));
   }

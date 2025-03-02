@@ -42,11 +42,7 @@ const signUpService = async (req, res) => {
     };
     const response = await main(params);
     console.log("response in signUpService",response)
-    // const token = jwt.sign({userId:response?._id, role: response?.role},process.env.JWT_SECRET_KEY, {'expiresIn': '1h'});
-    // let responseToSend = {...response,token};
     return { statusCode: 201, response, msg: "User created successfully" };
-    // return { statusCode: 201, responseToSend, msg: "User created successfully" };
-
   }
   } catch (error) {
     console.log("Error in signup service", error);

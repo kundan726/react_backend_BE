@@ -1,4 +1,4 @@
-const { createUser, fetchOneUser, storeOtp, fetchOtp, updateOtpDocument} = require("../queries/loginModule.queries");
+const { createUser, fetchOneUser, storeOtp, fetchOtp, updateOtpDocument, updateUser} = require("../queries/loginModule.queries");
 const {addProduct, fetchProduct, listProducts, editProduct, deleteProduct, listAllProducts,listLikeProducts } = require('../queries/productQueries')
 const main = async (params) => {
   try {
@@ -11,8 +11,8 @@ const main = async (params) => {
       case "fetchOneUser":
         response = await fetchOneUser(params);
         break;
-      case "editOneUser":
-        response = await editOneUser(params);
+      case "updateUser":
+        response = await updateUser(params);
         break;
       case "deleteOneUser":
         response = await deleteOneUser(params);
